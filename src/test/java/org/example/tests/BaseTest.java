@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     protected WebDriver driver;
@@ -23,6 +24,7 @@ public class BaseTest {
     @BeforeMethod
     public void setUp() {
         driver = DriverFactory.getDriver("browser");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(PropertiesLoader.getProperty("base.url"));
     }
 
@@ -35,6 +37,7 @@ public class BaseTest {
             driver.quit();
         }
     }
+
     @AfterMethod
     public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {
         if (testResult.getStatus() == ITestResult.FAILURE) {
@@ -44,13 +47,12 @@ public class BaseTest {
         }
     }
 
-
     public static void waitForElementToExist(WebDriver driver, By locator) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    public static void waitForElementToByVisible(WebDriver driver, WebElement element) {
+    public static void waitForElementToBeVisible(WebDriver driver, WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(element));
     }
