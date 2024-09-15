@@ -17,42 +17,39 @@ import java.util.Map;
 
 public class DriverFactory {
 
-    private static final Map<String, WebDriver> drivers = new HashMap<>();
+   // private static final Map<String, WebDriver> drivers = new HashMap<>();
 
     public static WebDriver getDriver(String browserKey) {
-        WebDriver driver = drivers.get(browserKey);
+        WebDriver driver;
 
-        if (driver == null) {
-            DriverType driverType = DriverType.valueOf(PropertiesLoader.getProperty(browserKey + ".type").toUpperCase());
-            switch (driverType) {
-                case CHROME -> {
-                    ChromeOptions chromeOptions = new ChromeOptions();
-                    chromeOptions.addArguments("--disable-search-engine-choice-screen");
-                    chromeOptions.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
-                    driver = new ChromeDriver(chromeOptions);
-                }
-                case FIREFOX -> {
-                    FirefoxOptions firefoxOptions = new FirefoxOptions();
-                    driver = new FirefoxDriver(firefoxOptions);
-                }
-                case OPERA -> {
-                    OperaOptions operaOptions = new OperaOptions();
-                    driver = new OperaDriver(operaOptions);
-                }
-                case EDGE -> {
-                    EdgeOptions edgeOptions = new EdgeOptions();
-                    driver = new EdgeDriver(edgeOptions);
-                }
-                default -> throw new IllegalArgumentException("Unknown browser: " + driverType);
+        DriverType driverType = DriverType.valueOf(PropertiesLoader.getProperty(browserKey + ".type").toUpperCase());
+        switch (driverType) {
+            case CHROME -> {
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--disable-search-engine-choice-screen");
+                chromeOptions.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
+                driver = new ChromeDriver(chromeOptions);
             }
-            driver.manage().window().setSize(new Dimension(
-                    PropertiesLoader.getIntProperty("window.width"),
-                    PropertiesLoader.getIntProperty("window.height")
-            ));
-            driver.get(PropertiesLoader.getProperty("base.url"));
-
-            drivers.put(browserKey, driver);
+            case FIREFOX -> {
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                driver = new FirefoxDriver(firefoxOptions);
+            }
+            case OPERA -> {
+                OperaOptions operaOptions = new OperaOptions();
+                driver = new OperaDriver(operaOptions);
+            }
+            case EDGE -> {
+                EdgeOptions edgeOptions = new EdgeOptions();
+                driver = new EdgeDriver(edgeOptions);
+            }
+            default -> throw new IllegalArgumentException("Unknown browser: " + driverType);
         }
+        driver.manage().window().setSize(new Dimension(
+                PropertiesLoader.getIntProperty("window.width"),
+                PropertiesLoader.getIntProperty("window.height")
+        ));
+        driver.get(PropertiesLoader.getProperty("base.url"));
+
         return driver;
     }
 }
