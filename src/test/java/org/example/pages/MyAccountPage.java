@@ -27,6 +27,16 @@ public class MyAccountPage extends BaseTest {
     @FindBy(name="register")
     private WebElement registerButton;
 
+    @FindBy(id="username")
+    private WebElement usernameInput;
+
+    @FindBy(id="password")
+    private WebElement passwordInput;
+
+    @FindBy(name="login")
+    private WebElement loginButton;
+
+
     public LoggedUserPage registerUserValidData(String email, String password) {
         registerUser(email, password);
         return new LoggedUserPage(driver);
@@ -37,7 +47,7 @@ public class MyAccountPage extends BaseTest {
         return this;
     }
 
-    public void registerUser(String email, String password) {
+    private void registerUser(String email, String password) {
         regEmailInput.sendKeys(email);
         regPasswordInput.sendKeys(password);
         registerButton.click();
@@ -47,6 +57,22 @@ public class MyAccountPage extends BaseTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         // Poprawne użycie ExpectedConditions
         return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@class='woocommerce-error']//li")));
+    }
+
+    public LoggedUserPage loginValidUser(String username, String password) {
+        loginUser(username, password);
+        return new LoggedUserPage(driver);
+    }
+
+    public MyAccountPage loginInvalidUser(String username, String password) {
+        loginUser(username, password);
+        return this;
+    }
+
+    private void loginUser(String username, String password) {
+        usernameInput.sendKeys(username);
+        passwordInput.sendKeys(password);
+        loginButton.click();
     }
 
 }
