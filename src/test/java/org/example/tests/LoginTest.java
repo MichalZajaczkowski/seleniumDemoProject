@@ -6,7 +6,7 @@ import org.example.pages.Homepage;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.example.utils.TestData;
+import org.example.models.RegisterModel;
 
 public class LoginTest extends BaseTest{
     private static final Logger log = LogManager.getLogger();
@@ -14,8 +14,8 @@ public class LoginTest extends BaseTest{
     @Test
     public void loginValidUserTest() {
         // Pobierz dane z klasy TestData
-        String email = TestData.getEmail();
-        String password = TestData.getPassword();
+        String email = RegisterModel.getEmail();
+        String password = RegisterModel.getPassword();
 
         log.info("Logowanie użytkownika: Email: {}, Hasło: {}", email, password);
 

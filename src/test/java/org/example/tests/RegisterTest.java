@@ -3,7 +3,7 @@ package org.example.tests;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.pages.Homepage;
-import org.example.utils.TestData;
+import org.example.models.RegisterModel;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -19,8 +19,8 @@ public class RegisterTest extends BaseTest{
         String password = generateStrongPassword(); // Generuj silne hasło
         log.info("Wygenerowano losowe dane użytkownika: Email: {}, Hasło: {}", email, password);
 
-        TestData.setEmail(email);
-        TestData.setPassword(password);
+        RegisterModel.setEmail(email);
+        RegisterModel.setPassword(password);
         // Rejestracja użytkownika
         WebElement dashboardLink = new Homepage(driver)
                 .openMyAccountPage()

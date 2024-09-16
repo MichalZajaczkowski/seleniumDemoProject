@@ -26,7 +26,11 @@ public class DriverFactory {
         switch (driverType) {
             case CHROME -> {
                 ChromeOptions chromeOptions = new ChromeOptions();
+                Map<String, Object> prefs = new HashMap<String, Object>();
                 chromeOptions.addArguments("--disable-search-engine-choice-screen");
+                prefs.put("profile.default_content_setting_values.notifications", 2);
+                prefs.put("autofill.profile_enabled", false);
+                chromeOptions.setExperimentalOption("prefs", prefs);
                 chromeOptions.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
                 driver = new ChromeDriver(chromeOptions);
             }
