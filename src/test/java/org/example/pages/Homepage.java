@@ -11,6 +11,10 @@ public class Homepage extends BaseTest {
     @FindBy(xpath = "//span[text()='My account']")
     private WebElement myAccount;
 
+    @FindBy(xpath = "//span[text()='Shop']")
+    private WebElement shopLink;
+
+
     public Homepage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -19,5 +23,10 @@ public class Homepage extends BaseTest {
     public MyAccountPage openMyAccountPage() {
         myAccount.click();
         return new MyAccountPage(driver);
+    }
+
+    public ProductListPage openShopPage() {
+        shopLink.click();
+        return new ProductListPage(driver);
     }
 }

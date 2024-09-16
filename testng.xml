@@ -15,5 +15,11 @@
             <class name="org.example.tests.LoginTest"/>
         </classes>
     </test>
+    <test name="Checkout Test">
+        <classes>
+            <class name="org.example.tests.CheckoutTest"/>
+        </classes>
+    </test>
+
 
 </suite>

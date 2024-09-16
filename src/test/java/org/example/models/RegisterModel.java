@@ -1,19 +1,19 @@
-package org.example.utils;
+package org.example.models;
 
 import lombok.Getter;
 
 
-public class TestData {
+public class RegisterModel {
     @Getter
     private static String email;
     @Getter
     private static String password;
 
     public static void setEmail(String email) {
-        TestData.email = email;
+        RegisterModel.email = email;
     }
 
     public static void setPassword(String password) {
-        TestData.password = password;
+        RegisterModel.password = password;
     }
 }

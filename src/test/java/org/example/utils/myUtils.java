@@ -10,6 +10,12 @@ public class myUtils {
 
     private static final String[] FIRST_NAMES = {"John", "Michael", "Sarah", "Jessica", "David", "Emily", "James", "Sophie"};
     private static final String[] LAST_NAMES = {"Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia"};
+    private static final String[] COMPANY_NAMES = {"TechCorp", "SoftSolutions", "MegaMarket", "GreenEnergy", "BlueSky", "FastTrack", "SmartApps"};
+    private static final String[] COUNTRIES = {"Poland"};//, "Germany", "France", "United Kingdom (UK)", "Canada", "Australia"};
+    //TODO: do walidacji kody pocztowe dla różnych krajów
+    private static final String[] STREETS = {"Main St", "Highland Ave", "Broadway", "Elm St", "Oak St", "Pine St", "Maple Ave"};
+    private static final String[] CITIES = {"New York", "Warsaw", "Berlin", "Paris", "London", "Toronto", "Sydney"};
+
     private static final String UPPER_CASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String LOWER_CASE = "abcdefghijklmnopqrstuvwxyz";
     private static final String DIGITS = "0123456789";
@@ -26,6 +32,53 @@ public class myUtils {
     // Metoda do generowania losowego nazwiska
     public static String generateRandomLastName() {
         return LAST_NAMES[random.nextInt(LAST_NAMES.length)];
+    }
+
+    // Metoda do generowania losowej nazwy firmy
+    public static String generateRandomCompanyName() {
+        return COMPANY_NAMES[random.nextInt(COMPANY_NAMES.length)];
+    }
+
+    // Metoda do generowania losowego kraju
+    public static String generateRandomCountry() {
+        return COUNTRIES[random.nextInt(COUNTRIES.length)];
+    }
+
+    // Metoda do generowania losowej ulicy z numerem
+    public static String generateRandomStreet() {
+        String street = STREETS[random.nextInt(STREETS.length)];
+        int streetNumber = random.nextInt(999) + 1; // Losowy numer ulicy od 1 do 999
+        return street + " " + streetNumber;
+    }
+
+    // Metoda do generowania losowego kodu pocztowego
+    public static String generateRandomZipCode() {
+        // Przykład formatu kodu pocztowego: 12345 lub 12-345 (można dostosować do lokalizacji)
+        int zipCodePart1 = random.nextInt(90) + 10; // Dwu cyfrowa część
+        int zipCodePart2 = random.nextInt(900) + 100; // Trzy cyfrowa część
+        return zipCodePart1 + "-" + zipCodePart2;
+    }
+
+    // Metoda do generowania losowego miasta
+    public static String generateRandomCity() {
+        return CITIES[random.nextInt(CITIES.length)];
+    }
+
+    // Metoda do generowania losowego numeru telefonu
+    public static String generateRandomPhone() {
+        // Przykład formatu telefonu: +48 123 456 789
+        String countryCode = "+48"; // Można dostosować, np. +1 dla USA
+        int phonePart1 = random.nextInt(900) + 100; // Trzy cyfry
+        int phonePart2 = random.nextInt(900) + 100; // Trzy cyfry
+        int phonePart3 = random.nextInt(900) + 100; // Trzy cyfry
+        return countryCode + " " + phonePart1 + " " + phonePart2 + " " + phonePart3;
+    }
+
+    // Metoda do generowania losowego numeru domu
+    public static String generateRandomHouseNumber() {
+        int houseNumber = random.nextInt(999) + 1; // Losowy numer domu od 1 do 999
+        char houseLetter = (random.nextBoolean()) ? (char)(random.nextInt(26) + 'A') : ' '; // Losowa litera A-Z (opcjonalna)
+        return houseLetter == ' ' ? String.valueOf(houseNumber) : houseNumber + "" + houseLetter;
     }
 
     // Metoda do generowania losowego poprawnego adresu e-mail
